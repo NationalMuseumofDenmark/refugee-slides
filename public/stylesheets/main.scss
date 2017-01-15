@@ -1,0 +1,16 @@
+@import 'bootstrap';
+
+$focus-color: #ff0;
+$map-background-color: #000;
+$map-country-fill-color: #2e2e2e;
+$map-country-focus-fill-color: mix($map-country-fill-color, $focus-color, 75%);
+$map-country-stroke-color: #222;
+$title-color: #fff283;
+$overlay-text-color: #fff;
+
+$default-transition-duration: .5s;
+
+@import 'map';
+@import 'overlay';
+@import 'information';
+@import 'date';

@@ -1,0 +1,12 @@
+include ../mixins/information
+
+.overlay__slide
+  .date= year
+  .overlay__bottom
+    +information(
+      'Refugees',
+      'Flygtninge',
+      helpers.formatNumber(totalRefugees),
+      'اللاجئين',
+      'پناهندگان'
+    )

@@ -1,0 +1,6 @@
+files:
+  include: 'public/stylesheets/**/*.scss'
+rules:
+  class-name-format:
+    - 1
+    - convention: hyphenatedbem

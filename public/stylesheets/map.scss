@@ -1,0 +1,42 @@
+.map {
+  background-color: $map-background-color;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+
+  .everything {
+    transition: opacity $default-transition-duration, transform $default-transition-duration;
+  }
+
+  &--hidden {
+    .everything {
+      opacity: 0;
+    }
+  }
+
+  .country {
+    fill: $map-country-fill-color;
+    stroke: $map-country-stroke-color;
+    stroke-width: .5;
+    transition: fill $default-transition-duration;
+
+    &--focus {
+      fill: $map-country-focus-fill-color;
+      // stroke: $map-country-focus-stroke-color;
+      transform: translate3d(0, 0, -10px);
+      z-index: 1;
+    }
+  }
+
+  .focusses {
+    z-index: 2;
+
+    &__focus {
+      fill-opacity: .2;
+      fill: $focus-color;
+      stroke-opacity: .5;
+      stroke-width: .5;
+      stroke: $focus-color;
+    }
+  }
+}
