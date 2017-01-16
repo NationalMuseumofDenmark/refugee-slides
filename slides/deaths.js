@@ -1,6 +1,8 @@
 const unhcr = require('../services/unhcr');
 const renderSlide = require('../render-slide');
 
+const INTRO_DURATION = 10000;
+
 module.exports = (parameters) => {
   return unhcr.mediterranean.deathsAndArrivalsByYear()
   .then((yearsOfDeathsAndArrivals) => {
@@ -11,7 +13,7 @@ module.exports = (parameters) => {
              deathsAndArrivalsThatYear.arrivals > 0;
     }).sort();
 
-    return years.map(year => {
+    const slides = years.map(year => {
       const deathsAndArrivalsThatYear = yearsOfDeathsAndArrivals[year];
       return {
         content: renderSlide('deaths', {
@@ -23,5 +25,16 @@ module.exports = (parameters) => {
         map: false
       };
     });
+
+    const fromYear = Math.min(...years);
+    const toYear = Math.max(...years);
+    return [{
+      content: renderSlide('intro-deaths', {
+        slideCount: slides.length,
+        firstYear: fromYear,
+        lastYear: toYear
+      }),
+      duration: INTRO_DURATION
+    }].concat(slides);
   });
 };

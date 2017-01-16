@@ -1,0 +1,16 @@
+extends intro
+
+block title
+  span= helpers.translate('Syria', 'en')
+  span= ' · '
+  span= helpers.translate('Syria', 'da')
+  span= ' · '
+  span= helpers.translate('Syria', 'ar')
+  span= ' · '
+  span= helpers.translate('Syria', 'fa')
+
+block introduction
+  p.
+    The following #{slideCount} slides focusses on Syria from #{firstYear}
+    until #{lastYear}.
+  p No data is published by the UNCHR from #{lastYear} and onwards.

@@ -3,6 +3,8 @@ const worldbank = require('../services/worldbank');
 const renderSlide = require('../render-slide');
 const helpers = require('../helpers');
 
+const INTRO_DURATION = 10000;
+
 module.exports = (parameters) => {
   return unhcr.refugeesPerYearAndContries({
     years: parameters.years,
@@ -12,6 +14,7 @@ module.exports = (parameters) => {
     // Determine the total population of the country
     const fromYear = Math.min(...parameters.years);
     const toYear = Math.max(...parameters.years);
+
     return worldbank.totalPopulation('SY', fromYear, toYear)
     .then((populationStatistics) => {
       const populationsPerYear = {};
@@ -30,26 +33,33 @@ module.exports = (parameters) => {
         yearAccumulation.totalPopulation = totalPopulation;
       });
       return yearAccumulations;
-    });
-  })
-  .then((yearAccumulations) => {
-    return yearAccumulations.map((yearAccumulation) => {
-      return {
-        content: renderSlide('syria', {
-          totalPopulation: yearAccumulation.totalPopulation,
-          totalInternallyDisplaced: yearAccumulation.totalInternallyDisplaced || 0,
-          totalRefugees: yearAccumulation.totalRefugees || 0,
-          year: yearAccumulation.year
+    }).then((yearAccumulations) => {
+      const slides = yearAccumulations.map((yearAccumulation) => {
+        return {
+          content: renderSlide('syria', {
+            totalPopulation: yearAccumulation.totalPopulation,
+            totalInternallyDisplaced: yearAccumulation.totalInternallyDisplaced || 0,
+            totalRefugees: yearAccumulation.totalRefugees || 0,
+            year: yearAccumulation.year
+          }),
+          duration: 5000,
+          map: {
+            countriesInFocus: [
+              { code: 'SYR' }
+            ],
+            scale: 5,
+            offset: [-500, 0]
+          }
+        };
+      });
+      return [{
+        content: renderSlide('intro-syria', {
+          slideCount: slides.length,
+          firstYear: fromYear,
+          lastYear: toYear
         }),
-        duration: 5000,
-        map: {
-          countriesInFocus: [
-            { code: 'SYR' }
-          ],
-          scale: 5,
-          offset: [-500, 0]
-        }
-      };
+        duration: INTRO_DURATION
+      }].concat(slides);
     });
   });
 };
