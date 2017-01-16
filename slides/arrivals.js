@@ -2,12 +2,31 @@ const unhcr = require('../services/unhcr');
 const renderSlide = require('../render-slide');
 const helpers = require('../helpers');
 
+const INTRO_DURATION = 10000;
+
 module.exports = (parameters) => {
   return unhcr.mediterranean.arrivalsPerYearMonthLocation()
   .then(arrivalsPerYear => {
-    const slides = [];
     const years = Object.keys(arrivalsPerYear)
     .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+
+    const firstYear = Math.min(...years);
+    const lastYear = Math.max(...years);
+
+    const slideCount = years.reduce((result, year) => {
+      const arrivalsThatYear = arrivalsPerYear[year];
+      const months = Object.keys(arrivalsThatYear);
+      return result + months.length;
+    }, 0);
+
+    const slides = [{
+      content: renderSlide('intro-arrivals', {
+        slideCount,
+        firstYear,
+        lastYear
+      }),
+      duration: INTRO_DURATION
+    }];
 
     // Calculate the maximal amount of refugees a sigle country has had
     const maximalPerCountryMonth = years.reduce((max, year) => {

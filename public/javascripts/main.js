@@ -5,9 +5,13 @@ const $errorOverlay = $('.overlay__error');
 // Log any error and reload the page - with a timeout to prevent enless reloads
 window.onerror = function(message, url, lineNumber) {
   $errorOverlay.addClass(ACTIVE_SLIDE_CLASS);
-  const where = url.replace(location.href, '') + ' (line ' + lineNumber + ')';
-  const text = [message, where].join('\n');
-  $errorOverlay.find('#stacktrace').text(text);
+  const text = [message];
+  if(url && lineNumber) {
+    const where = url.replace(location.href, '') + ' (line ' + lineNumber + ')';
+    text.push(where);
+  }
+  console.log('ERROR', text);
+  $errorOverlay.find('#stacktrace').text(text.join('\n'));
   // Reload
   setTimeout(() => {
     location.reload();
@@ -44,7 +48,7 @@ const slideshow = new Slideshow({
   },
   mapElement: document.getElementById('map'),
   overlayElement: document.getElementById('overlay'),
-  autoProgress: false && true
+  autoProgress: true
 });
 
 // When resizing the window, resize the slideshows map

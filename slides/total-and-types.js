@@ -3,7 +3,7 @@ const renderSlide = require('../render-slide');
 const helpers = require('../helpers');
 
 const DEFAULT_DURATION = 5000;
-const INTRO_DURATION = 1000;
+const INTRO_DURATION = 10000;
 
 module.exports = (parameters) => {
   return unhcr.refugeesPerYearAndContries(parameters)

@@ -68,12 +68,13 @@
     flex-direction: column;
     font-family: 'Allerta Stencil', sans-serif;
     justify-content: center;
+    z-index: 1000;
 
     pre {
       background-color: $error-pre-background-color;
       color: $error-pre-text-color;
-      min-width: 50vw;
       padding: 1rem;
+      width: 75vw;
     }
   }
 }

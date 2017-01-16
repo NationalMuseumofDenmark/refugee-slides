@@ -23,6 +23,10 @@ class Slideshow {
         this.slides = slides;
         // and then changing to the first slide
         this.changeSlide(null, 0);
+      }, (err) => {
+        throw new Error('An error occurred when loading slides: ' + err);
+      }).then(null, err => {
+        window.onerror(err.message, err.fileName, err.lineNumber);
       });
     } else {
       throw new Error('No way of loading slides');
