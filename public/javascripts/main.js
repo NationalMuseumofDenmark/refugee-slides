@@ -16,6 +16,13 @@ window.onerror = function(message, url, lineNumber) {
   return true;
 };
 
+// To free any accidental memory leaks and refresh the data.
+// Once every day.
+const AUTOMATIC_RELOAD_DELAY = 1000 * 60 * 60 * 24;
+setTimeout(() => {
+  location.reload();
+}, AUTOMATIC_RELOAD_DELAY);
+
 const request = require('request-promise');
 
 const Slideshow = require('./slideshow');
