@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const _ = require('lodash');
 
-const TOP_COUNTRY_COUNT = 5;
+const TOP_COUNTRY_COUNT = 10;
 
 const unhcr = require('../services/unhcr');
 
@@ -23,13 +23,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/slides.json', function(req, res, next) {
-  const PAST_FIVE_TIME_SERIES_YEARS = TIME_SERIES_YEARS.slice(0, 5);
+  const PAST_FIVE_TIME_SERIES_YEARS = TIME_SERIES_YEARS.slice(0, 5).reverse();
 
   const CURRENT_YEAR = (new Date()).getFullYear();
   const PAST_FIVE_YEARS = [];
   for(let year = CURRENT_YEAR; year > CURRENT_YEAR-5; year--) {
     PAST_FIVE_YEARS.push(year);
   }
+  PAST_FIVE_YEARS.reverse();
 
   let slidePromises = [
     require('../slides/total-and-types')({

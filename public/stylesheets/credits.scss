@@ -1,0 +1,16 @@
+.credits {
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  font-size: 75%;
+  margin-left: 5vmin;
+  margin-top: 5vmin;
+
+  &__logo {
+    img {
+      margin: -.8rem -1rem;
+      width: 10rem;
+    }
+  }
+}

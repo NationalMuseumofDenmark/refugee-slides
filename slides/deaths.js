@@ -9,7 +9,7 @@ module.exports = (parameters) => {
       const deathsAndArrivalsThatYear = yearsOfDeathsAndArrivals[year];
       return deathsAndArrivalsThatYear.deaths > 0 &&
              deathsAndArrivalsThatYear.arrivals > 0;
-    }).sort().reverse();
+    }).sort();
 
     return years.map(year => {
       const deathsAndArrivalsThatYear = yearsOfDeathsAndArrivals[year];

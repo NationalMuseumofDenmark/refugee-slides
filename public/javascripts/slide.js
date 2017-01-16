@@ -19,11 +19,11 @@ class Slide {
   }
 
   enter() {
-    if(this.options.map) {
-      this.slideshow.map.show();
-      this.slideshow.map.update(this.options.map);
-    } else {
+    if(this.options.map === false) {
       this.slideshow.map.hide();
+    } else {
+      this.slideshow.map.show();
+      this.slideshow.map.update(this.options.map || {});
     }
     // If we are already exiting
     if(this.removalTimeout) {

@@ -1,0 +1,21 @@
+extends intro
+
+block title
+  span= helpers.translate('On the run', 'en')
+  span= ' · '
+  span= helpers.translate('On the run', 'da')
+  span= ' · '
+  span= helpers.translate('On the run', 'ar')
+  span= ' · '
+  span= helpers.translate('On the run', 'fa')
+
+block introduction
+  p.
+    The following #{slideCount} slides present the <u>total</u> number of people
+    globally from #{firstYear} until #{lastYear} across all four categories:
+  ul
+    li Internally displaced
+    li Stateless
+    li Refugees
+    li Asylum seekers
+  p No data is published by the UNCHR from #{lastYear} and onwards.

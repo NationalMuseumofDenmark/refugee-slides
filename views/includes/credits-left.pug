@@ -1,0 +1,12 @@
+.credits
+  .credits__title
+    - const languageKey = 'Data from';
+    = helpers.translate(languageKey, 'en')
+    = ' · '
+    = helpers.translate(languageKey, 'da')
+    = ' · '
+    = helpers.translate(languageKey, 'ar')
+    = ' · '
+    = helpers.translate(languageKey, 'fa')
+  .credits__logo
+    img(src='/images/unhcr-logo.png')

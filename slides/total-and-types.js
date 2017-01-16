@@ -2,14 +2,27 @@ const unhcr = require('../services/unhcr');
 const renderSlide = require('../render-slide');
 const helpers = require('../helpers');
 
+const DEFAULT_DURATION = 5000;
+const INTRO_DURATION = 1000;
+
 module.exports = (parameters) => {
   return unhcr.refugeesPerYearAndContries(parameters)
   .then((yearAccumulations) => {
+    const firstYear = Math.min(...yearAccumulations.map(a => a.year));
+    const lastYear = Math.max(...yearAccumulations.map(a => a.year));
     const slides = [];
-    const maxTotalRefugees = yearAccumulations.reduce((result, accumulation) => {
-      const maxTotalRefugeesThisYear = accumulation.topCountries[0].totalRefugees;
-      if(maxTotalRefugeesThisYear > result) {
-        return maxTotalRefugeesThisYear;
+    slides.push({
+      content: renderSlide('intro-total', {
+        slideCount: yearAccumulations.length,
+        firstYear,
+        lastYear
+      }),
+      duration: INTRO_DURATION
+    });
+    const maxTotalCombined = yearAccumulations.reduce((result, accumulation) => {
+      const topCountry = accumulation.topCountries[0];
+      if(topCountry.totalCombined > result) {
+        return topCountry.totalCombined;
       } else {
         return result;
       }
@@ -20,21 +33,29 @@ module.exports = (parameters) => {
       .map(accumulation => {
         return {
           code: accumulation.origin,
-          label: helpers.formatNumber(accumulation.totalRefugees),
-          significance: accumulation.totalRefugees / maxTotalRefugees
+          label: helpers.formatNumber(accumulation.totalCombined),
+          significance: accumulation.totalCombined / maxTotalCombined
         };
       });
 
       slides.push({
         content: renderSlide('total', {
-          totalRefugees: yearAccumulation.totalRefugees || 0,
+          totalCombined: yearAccumulation.totalCombined || 0,
           year: yearAccumulation.year
         }),
-        duration: 5000,
+        duration: DEFAULT_DURATION,
         map: {
           countriesInFocus
         }
       });
+    });
+    slides.push({
+      content: renderSlide('intro-types', {
+        slideCount: yearAccumulations.length,
+        firstYear,
+        lastYear
+      }),
+      duration: INTRO_DURATION
     });
     // Generate the 'type' slides
     yearAccumulations.forEach((yearAccumulation) => {
@@ -46,14 +67,7 @@ module.exports = (parameters) => {
           totalAsylumSeekers: yearAccumulation.totalAsylumSeekers || 0,
           year: yearAccumulation.year
         }),
-        duration: 5000,
-        map: {
-          projection: {
-            center: [0, 0],
-            rotate: [0, 0],
-            scale: 200
-          }
-        }
+        duration: DEFAULT_DURATION
       });
     });
     return slides;

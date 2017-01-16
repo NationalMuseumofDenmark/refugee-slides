@@ -4,7 +4,6 @@ const ACTIVE_SLIDE_CLASS = 'overlay__slide--active';
 const $errorOverlay = $('.overlay__error');
 // Log any error and reload the page - with a timeout to prevent enless reloads
 window.onerror = function(message, url, lineNumber) {
-  console.error(message, url, '(line ' + lineNumber + ')');
   $errorOverlay.addClass(ACTIVE_SLIDE_CLASS);
   const where = url.replace(location.href, '') + ' (line ' + lineNumber + ')';
   const text = [message, where].join('\n');
@@ -13,7 +12,7 @@ window.onerror = function(message, url, lineNumber) {
   setTimeout(() => {
     location.reload();
   }, ERROR_RELOAD_DELAY);
-  return true;
+  return false;
 };
 
 // To free any accidental memory leaks and refresh the data.
@@ -45,7 +44,7 @@ const slideshow = new Slideshow({
   },
   mapElement: document.getElementById('map'),
   overlayElement: document.getElementById('overlay'),
-  autoProgress: true
+  autoProgress: false && true
 });
 
 // When resizing the window, resize the slideshows map

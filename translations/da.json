@@ -1,12 +1,14 @@
 {
-  "Arrivals pr month": "Ankomster pr måned",
-  "Arrivals pr year": "Ankomster pr år",
+  "Arrivals per month": "Ankomster pr måned",
+  "Arrivals per year": "Ankomster pr år",
   "Asylum seekers": "Asylsøgere",
-  "Deaths pr year": "Dødsfald pr år",
+  "Data from": "Data fra",
+  "Deaths per year": "Dødsfald pr år",
   "Internally displaced": "Internt fordrevne",
   "Loading statistics from": "Henter tal fra",
+  "On the run": "På flugt",
   "Population": "Befolkning",
   "Refugees": "Flygtninge",
-  "Stateless": "Stateless",
+  "Stateless": "Statsløse",
   "Syria": "Syrien"
 }

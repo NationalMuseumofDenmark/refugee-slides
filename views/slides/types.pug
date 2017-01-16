@@ -2,20 +2,21 @@ include ../mixins/information
 
 .overlay__slide
   .date= year
-  .overlay__middle
-    +information(
-      'Internally displaced',
-      helpers.formatNumber(totalInternallyDisplaced)
-    )
-    +information(
-      'Stateless',
-      helpers.formatNumber(totalStateless)
-    )
-    +information(
-      'Refugees',
-      helpers.formatNumber(totalRefugees)
-    )
-    +information(
-      'Asylum seekers',
-      helpers.formatNumber(totalAsylumSeekers)
-    )
+  .overlay__section.overlay__section--middle
+    .informations
+      +information(
+        'Internally displaced',
+        helpers.formatNumber(totalInternallyDisplaced)
+      )
+      +information(
+        'Stateless',
+        helpers.formatNumber(totalStateless)
+      )
+      +information(
+        'Refugees',
+        helpers.formatNumber(totalRefugees)
+      )
+      +information(
+        'Asylum seekers',
+        helpers.formatNumber(totalAsylumSeekers)
+      )

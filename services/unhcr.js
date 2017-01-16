@@ -122,19 +122,30 @@ const unhcr = {
             totalStateless: 0,
             totalRefugees: 0,
             totalAsylumSeekers: 0,
+            totalCombined: 0,
             perResidence: {},
             origin
           });
-          accumulation.totalInternallyDisplaced += parseCount(statistic, 'idps');
-          accumulation.totalStateless += parseCount(statistic, 'stateless_persons');
-          accumulation.totalRefugees += parseCount(statistic, 'refugees');
-          accumulation.totalAsylumSeekers += parseCount(statistic, 'asylum_seekers');
+          const internallyDisplaced = parseCount(statistic, 'idps');
+          const stateless = parseCount(statistic, 'stateless_persons');
+          const refugees = parseCount(statistic, 'refugees');
+          const asylumSeekers = parseCount(statistic, 'asylum_seekers');
+
+          accumulation.totalInternallyDisplaced += internallyDisplaced;
+          accumulation.totalStateless += stateless;
+          accumulation.totalRefugees += refugees;
+          accumulation.totalAsylumSeekers += asylumSeekers;
+
+          accumulation.totalCombined += internallyDisplaced;
+          accumulation.totalCombined += stateless;
+          accumulation.totalCombined += refugees;
+          accumulation.totalCombined += asylumSeekers;
         });
 
         const statisticsPerOriginList = Object.values(statisticsPerOrigin);
-        // Sort by totalRefugees
+        // Sort by totalCombined
         statisticsPerOriginList.sort((accumulationA, accumulationB) => {
-          return accumulationB.totalRefugees - accumulationA.totalRefugees;
+          return accumulationB.totalCombined - accumulationA.totalCombined;
         });
 
         function totalAcrossCountries(key) {
@@ -148,11 +159,18 @@ const unhcr = {
           totalInternallyDisplaced: totalAcrossCountries('totalInternallyDisplaced'),
           totalStateless: totalAcrossCountries('totalStateless'),
           totalRefugees: totalAcrossCountries('totalRefugees'),
-          totalAsylumSeekers: totalAcrossCountries('totalAsylumSeekers')
+          totalAsylumSeekers: totalAcrossCountries('totalAsylumSeekers'),
+          totalCombined: totalAcrossCountries('totalCombined')
         };
 
+        // Now - filter out any XX* countries
+        const statisticsPerCountry = statisticsPerOriginList
+        .filter(accumulation => {
+          return accumulation.origin.indexOf('XX') !== 0;
+        });
+
         if(parameters.topCountryCount) {
-          result.topCountries = statisticsPerOriginList.slice(0, parameters.topCountryCount);
+          result.topCountries = statisticsPerCountry.slice(0, parameters.topCountryCount);
         }
 
         return result;

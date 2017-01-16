@@ -5,8 +5,9 @@ include ../mixins/information
     span= month
     span= ' / '
     span= year
-  .overlay__bottom
-    +information(
-      'Arrivals pr month',
-      helpers.formatNumber(totalArrivals)
-    )
+  .overlay__section.overlay__section--bottom
+    .informations
+      +information(
+        'Arrivals per month',
+        helpers.formatNumber(totalArrivals)
+      )

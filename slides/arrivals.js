@@ -7,7 +7,7 @@ module.exports = (parameters) => {
   .then(arrivalsPerYear => {
     const slides = [];
     const years = Object.keys(arrivalsPerYear)
-    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).reverse();
+    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
     // Calculate the maximal amount of refugees a sigle country has had
     const maximalPerCountryMonth = years.reduce((max, year) => {
@@ -28,7 +28,7 @@ module.exports = (parameters) => {
     years.forEach(year => {
       const arrivalsThatYear = arrivalsPerYear[year];
       const months = Object.keys(arrivalsThatYear)
-      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).reverse();
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
       months.forEach(month => {
         const arrivalsThatMonth = arrivalsThatYear[month];

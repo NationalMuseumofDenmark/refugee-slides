@@ -7,7 +7,7 @@ $map-country-focus-fill-color: mix($map-country-fill-color, $focus-color, 75%);
 $map-country-stroke-color: #222;
 $title-color: #fff283;
 $overlay-text-color: #fff;
-$error-overlay-background-color: rgba(0, 0, 0, .75);
+$dimmed-overlay-background-color: rgba(0, 0, 0, .75);
 $error-pre-background-color: rgba(255, 255, 255, .25);
 $error-pre-text-color: #fff;
 
@@ -26,3 +26,4 @@ body {
 @import 'overlay';
 @import 'information';
 @import 'date';
+@import 'credits';

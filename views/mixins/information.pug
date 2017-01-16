@@ -1,9 +1,9 @@
 mixin information(languageKey, center)
   .information
     .information__left
-      .information__left-top= languageKey
-      .information__left-bottom= helpers.translate(languageKey, 'da')
+      div= helpers.translate(languageKey, 'en')
+      div= helpers.translate(languageKey, 'da')
     .information__center= center
     .information__right
-      .information__right-top= helpers.translate(languageKey, 'ar')
-      .information__right-bottom= helpers.translate(languageKey, 'fa')
+      div= helpers.translate(languageKey, 'ar')
+      div= helpers.translate(languageKey, 'fa')

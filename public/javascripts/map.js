@@ -1,13 +1,28 @@
 const DEFAULT_DURATION = 1000;
-const MAX_FOCUS_RADIUS = 50;
+const MIN_FOCUS_RADIUS = 10;
+const MAX_FOCUS_RADIUS = 70;
 const DEFAULT_FOCUS_SCALE = 2;
 const COUNTRY_FOCUS_CLASS = 'country--focus';
 const COUNTRY_IDS = {
   'GRE': 'GRC',
-  'SPA': 'ESP'
+  'SPA': 'ESP',
+  'XTB': 'CHN'
 };
+
+// Derived constants
+const FOCUS_RADIUS_SPAN = MAX_FOCUS_RADIUS - MIN_FOCUS_RADIUS;
+
 function countryCodeToId(code) {
   return COUNTRY_IDS[code] || code;
+}
+
+function focusRadius(focus, scale) {
+  if(focus.significance) {
+    const r = MIN_FOCUS_RADIUS + focus.significance * FOCUS_RADIUS_SPAN;
+    return r / scale;
+  } else {
+    return null;
+  }
 }
 
 function featureArrayBounds(features) {
@@ -213,9 +228,7 @@ class Map {
         const center = projection(focus.center);
         return center[1];
       })
-      .attr('r', (focus) => {
-        return focus.significance && focus.significance * MAX_FOCUS_RADIUS / scale;
-      });
+      .attr('r', focus => focusRadius(focus, scale));
 
     // When enter we append a circle
     focusUpdateSelection.enter()
@@ -234,9 +247,7 @@ class Map {
       .transition()
         .duration(duration)
         .style('opacity', 1)
-        .attr('r', (focus) => {
-          return focus.significance && focus.significance * MAX_FOCUS_RADIUS / scale;
-        });
+        .attr('r', focus => focusRadius(focus, scale));
 
     // When exit we remove the circle
     focusUpdateSelection.exit()

@@ -2,8 +2,9 @@ include ../mixins/information
 
 .overlay__slide
   .date= year
-  .overlay__bottom
-    +information(
-      'Refugees',
-      helpers.formatNumber(totalRefugees)
-    )
+  .overlay__section.overlay__section--bottom
+    .informations
+      +information(
+        'On the run',
+        helpers.formatNumber(totalCombined)
+      )

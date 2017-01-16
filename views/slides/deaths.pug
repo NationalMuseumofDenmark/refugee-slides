@@ -3,12 +3,13 @@ include ../mixins/information
 .overlay__slide.overlay__slide--ocean
   .date
     span= year
-  .overlay__middle
-    +information(
-      'Arrivals pr year',
-      helpers.formatNumber(totalArrivals)
-    )
-    +information(
-      'Deaths pr year',
-      helpers.formatNumber(totalDeaths)
-    )
+  .overlay__section.overlay__section--middle
+    .informations
+      +information(
+        'Arrivals per year',
+        helpers.formatNumber(totalArrivals)
+      )
+      +information(
+        'Deaths per year',
+        helpers.formatNumber(totalDeaths)
+      )
