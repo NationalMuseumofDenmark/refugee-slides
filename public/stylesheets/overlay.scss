@@ -6,7 +6,7 @@
 
   h1 {
     font-family: 'Cairo', sans-serif;
-    font-size: 4rem;
+    font-size: 3rem;
     margin-bottom: 3rem;
     text-align: center;
   }
@@ -55,8 +55,8 @@
     &--intro {
       background: $dimmed-overlay-background-color;
       .introduction {
-        font-size: 200%;
-        max-width: 30vw;
+        font-size: 150%;
+        max-width: 50vw;
       }
     }
   }
