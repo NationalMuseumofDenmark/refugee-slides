@@ -1,0 +1,25 @@
+include ../mixins/information
+
+.overlay__slide
+  .date= year
+  .overlay__middle
+    h1
+      span Syria
+      span= ' · '
+      span= helpers.translate('Syria', 'da')
+      span= ' · '
+      span= helpers.translate('Syria', 'ar')
+      span= ' · '
+      span= helpers.translate('Syria', 'fa')
+    +information(
+      'Population',
+      helpers.formatNumber(totalPopulation)
+    )
+    +information(
+      'Internally displaced',
+      helpers.formatNumber(totalInternallyDisplaced)
+    )
+    +information(
+      'Refugees',
+      helpers.formatNumber(totalRefugees)
+    )

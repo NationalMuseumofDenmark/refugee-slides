@@ -1,0 +1,12 @@
+include ../mixins/information
+
+.overlay__slide
+  .date
+    span= month
+    span= ' / '
+    span= year
+  .overlay__bottom
+    +information(
+      'Arrivals pr month',
+      helpers.formatNumber(totalArrivals)
+    )

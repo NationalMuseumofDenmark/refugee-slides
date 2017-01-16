@@ -2,32 +2,20 @@ include ../mixins/information
 
 .overlay__slide
   .date= year
-  .overlay__bottom
+  .overlay__middle
     +information(
       'Internally displaced',
-      'Internt fordrevne',
-      helpers.formatNumber(totalInternallyDisplaced),
-      'داخليا',
-      'از درون جابجا شده'
+      helpers.formatNumber(totalInternallyDisplaced)
     )
     +information(
       'Stateless',
-      'Statsløse',
-      helpers.formatNumber(totalStateless),
-      'عديم الجنسية',
-      'بی وطن'
+      helpers.formatNumber(totalStateless)
     )
     +information(
       'Refugees',
-      'Flygtninge',
-      helpers.formatNumber(totalRefugees),
-      'اللاجئين',
-      'پناهندگان'
+      helpers.formatNumber(totalRefugees)
     )
     +information(
       'Asylum seekers',
-      'Asylsøgere',
-      helpers.formatNumber(totalAsylumSeekers),
-      'طالبي اللجوء',
-      'پناهجویان'
+      helpers.formatNumber(totalAsylumSeekers)
     )

@@ -2,16 +2,15 @@
   background-color: $map-background-color;
   height: 100%;
   position: absolute;
+  transition: opacity $default-transition-duration;
   width: 100%;
 
-  .everything {
-    transition: opacity $default-transition-duration, transform $default-transition-duration;
+  &--hidden {
+    opacity: 0;
   }
 
-  &--hidden {
-    .everything {
-      opacity: 0;
-    }
+  .everything {
+    transition: transform $default-transition-duration;
   }
 
   .country {

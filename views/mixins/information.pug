@@ -1,9 +1,9 @@
-mixin information(leftTop, leftBottom, center, rightTop, rightBottom)
+mixin information(languageKey, center)
   .information
     .information__left
-      .information__left-top= leftTop
-      .information__left-bottom= leftBottom
+      .information__left-top= languageKey
+      .information__left-bottom= helpers.translate(languageKey, 'da')
     .information__center= center
     .information__right
-      .information__right-top= rightTop
-      .information__right-bottom= rightBottom
+      .information__right-top= helpers.translate(languageKey, 'ar')
+      .information__right-bottom= helpers.translate(languageKey, 'fa')

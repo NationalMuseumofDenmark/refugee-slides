@@ -2,6 +2,7 @@ const Map = require('./map');
 
 const ARROW_LEFT = 37;
 const ARROW_RIGHT = 39;
+const DEFAULT_DURATION = 5000;
 
 class Slideshow {
   constructor(options) {
@@ -37,6 +38,15 @@ class Slideshow {
     newSlide.enter(this);
     if(oldSlide) {
       oldSlide.exit(this);
+    }
+
+    // Clear any timeouts
+    clearTimeout(this.autoProgressTimeout);
+    if(this.options.autoProgress) {
+      const duration = newSlide.options.duration || DEFAULT_DURATION;
+      this.autoProgressTimeout = setTimeout(() => {
+        this.nextSlide();
+      }, duration);
     }
   }
 

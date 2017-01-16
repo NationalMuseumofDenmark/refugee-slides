@@ -4,10 +4,24 @@
   position: absolute;
   width: 100%;
 
+  h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
   &__bottom {
     bottom: 10vh;
     position: absolute;
     width: 100%;
+  }
+
+  &__middle {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
   }
 
   &__slide-name {
@@ -35,5 +49,27 @@
     flex-direction: column;
     font-family: 'Allerta Stencil', sans-serif;
     justify-content: center;
+  }
+
+  &__error {
+    align-items: center;
+    background-color: $error-overlay-background-color;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Allerta Stencil', sans-serif;
+    justify-content: center;
+
+    img {
+      margin: 3rem;
+      max-height: 50vmin;
+      max-width: 50vmin;
+    }
+
+    pre {
+      background-color: $error-pre-background-color;
+      color: $error-pre-text-color;
+      min-width: 50vw;
+      padding: 1rem;
+    }
   }
 }

@@ -1,6 +1,14 @@
 const DEFAULT_DURATION = 1000;
 const MAX_FOCUS_RADIUS = 50;
+const DEFAULT_FOCUS_SCALE = 2;
 const COUNTRY_FOCUS_CLASS = 'country--focus';
+const COUNTRY_IDS = {
+  'GRE': 'GRC',
+  'SPA': 'ESP'
+};
+function countryCodeToId(code) {
+  return COUNTRY_IDS[code] || code;
+}
 
 function featureArrayBounds(features) {
   if(features.length > 0) {
@@ -106,14 +114,14 @@ class Map {
     const $counties = this.$element.find('.country');
 
     let focusses = [];
-    let centerInWorld = [0, 0];
     let scale = 1;
+    let centerInView = this.projection([0, 0]);
     if(this.parameters.countriesInFocus) {
       // TODO: Determine scale, center and rotation from the list of countries
       focusses = this.parameters.countriesInFocus.map(accumulation => {
-        return this.worldFeatureCollection.features
+        const result = this.worldFeatureCollection.features
         .reduce((result, feature) => {
-          if(feature.id === accumulation.code) {
+          if(feature.id === countryCodeToId(accumulation.code)) {
             return {
               feature,
               significance: accumulation.significance,
@@ -124,11 +132,19 @@ class Map {
           }
           return result;
         }, null);
+        if(result === null) {
+          console.warn('Issues location the country:', accumulation.code);
+        }
+        return result;
       });
 
-      const focusBounds = featureArrayBounds(focusses.map(focus => {
+      const featuresInFocus = focusses.map(focus => {
         return focus.feature;
-      }));
+      });
+      centerInView = this.path.centroid({
+        type: 'FeatureCollection',
+        features: featuresInFocus
+      });
 
       // Update the countries in focus
       const contryIdsInFocus = focusses.map(focus => focus.id);
@@ -138,25 +154,32 @@ class Map {
       });
       const $countiesNotInFocus = $counties.not($countiesInFocus);
 
-      console.log('$countiesInFocus', $countiesInFocus);
       $countiesInFocus.addClass(COUNTRY_FOCUS_CLASS);
       $countiesNotInFocus.removeClass(COUNTRY_FOCUS_CLASS);
 
-      centerInWorld = boundsCenter(focusBounds);
-      scale = 2;
+      scale = this.parameters.scale || DEFAULT_FOCUS_SCALE;
     } else {
       // Remove the focus class from any country
       $counties.removeClass(COUNTRY_FOCUS_CLASS);
     }
 
-    const width = this.$element.width();
-    const height = this.$element.height();
-    const centerInView = this.projection(centerInWorld);
+    // Scale each of the two coordinates
+    centerInView[0] *= scale;
+    centerInView[1] *= scale;
 
     this.updateCountries(duration);
-    this.updateFocusses(focusses, duration);
-    const translateX = 0 - centerInView[0] * scale + width / 2;
-    const translateY = 0 - centerInView[1] * scale + height / 2;
+    this.updateFocusses(focusses, scale, duration);
+    let offsetX = centerInView[0];
+    let offsetY = centerInView[1];
+    if(this.parameters.offset) {
+      offsetX += this.parameters.offset[0];
+      offsetY += this.parameters.offset[1];
+    }
+    // Calculate the values for translation and update the styling transform
+    const width = this.$element.width();
+    const height = this.$element.height();
+    const translateX = width / 2 - offsetX;
+    const translateY = height / 2 - offsetY;
     this.updateTransform({
       translate: [translateX + 'px', translateY + 'px'],
       scale
@@ -171,7 +194,7 @@ class Map {
         .attr('d', this.path);
   }
 
-  updateFocusses(focusses, duration) {
+  updateFocusses(focusses, scale, duration) {
     const projection = this.projection;
 
     const focusUpdateSelection = this.focusses.selectAll('circle')
@@ -191,7 +214,7 @@ class Map {
         return center[1];
       })
       .attr('r', (focus) => {
-        return focus.significance * MAX_FOCUS_RADIUS;
+        return focus.significance && focus.significance * MAX_FOCUS_RADIUS / scale;
       });
 
     // When enter we append a circle
@@ -212,7 +235,7 @@ class Map {
         .duration(duration)
         .style('opacity', 1)
         .attr('r', (focus) => {
-          return focus.significance * MAX_FOCUS_RADIUS;
+          return focus.significance && focus.significance * MAX_FOCUS_RADIUS / scale;
         });
 
     // When exit we remove the circle

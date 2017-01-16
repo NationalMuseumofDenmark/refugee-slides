@@ -1,4 +1,4 @@
-@import 'bootstrap';
+$font-family-sans-serif: 'Cairo', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
 $focus-color: #ff0;
 $map-background-color: #000;
@@ -7,8 +7,20 @@ $map-country-focus-fill-color: mix($map-country-fill-color, $focus-color, 75%);
 $map-country-stroke-color: #222;
 $title-color: #fff283;
 $overlay-text-color: #fff;
+$error-overlay-background-color: rgba(0, 0, 0, .75);
+$error-pre-background-color: rgba(255, 255, 255, .25);
+$error-pre-text-color: #fff;
 
 $default-transition-duration: .5s;
+
+@import 'bootstrap';
+
+body {
+  background-image: url('/images/ocean-background.jpg');
+  background-position: 50% 100%;
+  background-size: cover;
+  // https://pixabay.com/da/vand-nat-refleksion-bl%C3%A5-m%C3%B8rk-hav-1081971/
+}
 
 @import 'map';
 @import 'overlay';

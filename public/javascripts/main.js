@@ -1,9 +1,26 @@
+const ERROR_RELOAD_DELAY = 10000;
+const ACTIVE_SLIDE_CLASS = 'overlay__slide--active';
+
+const $errorOverlay = $('.overlay__error');
+// Log any error and reload the page - with a timeout to prevent enless reloads
+window.onerror = function(message, url, lineNumber) {
+  console.error(message, url, '(line ' + lineNumber + ')');
+  $errorOverlay.addClass(ACTIVE_SLIDE_CLASS);
+  const where = url.replace(location.href, '') + ' (line ' + lineNumber + ')';
+  const text = [message, where].join('\n');
+  $errorOverlay.find('#stacktrace').text(text);
+  // Reload
+  setTimeout(() => {
+    location.reload();
+  }, ERROR_RELOAD_DELAY);
+  return true;
+};
+
 const request = require('request-promise');
 
 const Slideshow = require('./slideshow');
 const Slide = require('./slide');
 
-const ACTIVE_SLIDE_CLASS = 'overlay__slide--active';
 const $loading = $('.overlay__loading');
 
 const slideshow = new Slideshow({
@@ -20,7 +37,8 @@ const slideshow = new Slideshow({
     });
   },
   mapElement: document.getElementById('map'),
-  overlayElement: document.getElementById('overlay')
+  overlayElement: document.getElementById('overlay'),
+  autoProgress: true
 });
 
 // When resizing the window, resize the slideshows map

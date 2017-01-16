@@ -5,12 +5,10 @@
   &__left,
   &__right {
     flex-grow: 1;
-    font-family: sans-serif;
     font-size: 1.5rem;
   }
 
   &__left {
-    font-family: 'Open Sans', sans-serif;
     text-align: right;
     width: 33vw;
   }
@@ -25,7 +23,6 @@
   }
 
   &__right {
-    font-family: 'Cairo', sans-serif;
     text-align: left;
     width: 33vw;
   }

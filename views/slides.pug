@@ -4,5 +4,11 @@ block content
   svg#map.map
   #overlay.overlay
     .overlay__loading.overlay__slide.overlay__slide--active
-      h1 Henter tal fra
+      h2= helpers.translate('Loading statistics from', 'en')
+      h2= helpers.translate('Loading statistics from', 'da')
+      h2= helpers.translate('Loading statistics from', 'ar')
+      h2= helpers.translate('Loading statistics from', 'fa')
       img(src='/images/unhcr-logo.png')
+    .overlay__error.overlay__slide
+      img(src='/images/bug.png')
+      pre#stacktrace
