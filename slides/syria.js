@@ -58,6 +58,7 @@ module.exports = (parameters) => {
           firstYear: fromYear,
           lastYear: toYear
         }),
+        credits: false,
         duration: INTRO_DURATION
       }].concat(slides);
     });

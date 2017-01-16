@@ -21,6 +21,7 @@ module.exports = (parameters) => {
           totalDeaths: deathsAndArrivalsThatYear.deaths,
           year
         }),
+        credits: false,
         duration: 5000,
         map: false
       };

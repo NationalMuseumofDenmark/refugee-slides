@@ -17,6 +17,7 @@ module.exports = (parameters) => {
         firstYear,
         lastYear
       }),
+      credits: false,
       duration: INTRO_DURATION
     });
     const maxTotalCombined = yearAccumulations.reduce((result, accumulation) => {
@@ -55,6 +56,7 @@ module.exports = (parameters) => {
         firstYear,
         lastYear
       }),
+      credits: false,
       duration: INTRO_DURATION
     });
     // Generate the 'type' slides

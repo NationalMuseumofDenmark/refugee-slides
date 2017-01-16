@@ -25,6 +25,7 @@ module.exports = (parameters) => {
         firstYear,
         lastYear
       }),
+      credits: false,
       duration: INTRO_DURATION
     }];
 

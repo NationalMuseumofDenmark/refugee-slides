@@ -1,5 +1,7 @@
 const ACTIVE_CLASS = 'overlay__slide--active';
 
+const $credits = $('.overlay__credits');
+
 class Slide {
   constructor(slideshow, options) {
     this.slideshow = slideshow;
@@ -24,6 +26,12 @@ class Slide {
     } else {
       this.slideshow.map.show();
       this.slideshow.map.update(this.options.map || {});
+    }
+
+    if(this.options.credits === false) {
+      $credits.removeClass(ACTIVE_CLASS);
+    } else {
+      $credits.addClass(ACTIVE_CLASS);
     }
     // If we are already exiting
     if(this.removalTimeout) {
