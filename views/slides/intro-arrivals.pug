@@ -1,14 +1,9 @@
 extends intro
 
 block title
-  div= helpers.translate('Arrivals per month', 'en')
-  div= helpers.translate('Arrivals per month', 'da')
-  div= helpers.translate('Arrivals per month', 'ar')
-  div= helpers.translate('Arrivals per month', 'fa')
+  | Ankomster til Europa pr. måned
 
 block introduction
   p.
-    The following #{slideCount} slides show arrivals to countries in the
-    Mediterranean region. The numbers are persons per month from #{firstYear}
-    until #{lastYear}.
-  p The size of the circles indicate the relative number of arrivals per country.
+    De følgende slides viser det samlede antal ankomster over Middelhavet til Europa.
+    Tallene opdateres per måned og vises fra #{firstYear} – #{lastYear}.
