@@ -21,7 +21,6 @@ module.exports = (parameters) => {
           totalDeaths: deathsAndArrivalsThatYear.deaths,
           year
         }),
-        credits: false,
         duration: 5000,
         map: false
       };
@@ -35,6 +34,7 @@ module.exports = (parameters) => {
         firstYear: fromYear,
         lastYear: toYear
       }),
+      credits: false,
       duration: INTRO_DURATION
     }].concat(slides);
   });
