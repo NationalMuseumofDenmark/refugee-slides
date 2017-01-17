@@ -4,15 +4,25 @@
   position: absolute;
   width: 100%;
 
+  @media (max-width: map-get($grid-breakpoints, 'md')) {
+    font-size: 50%;
+  }
+  @media (max-width: map-get($grid-breakpoints, 'xl')) {
+    font-size: 80%;
+  }
+  @media (min-width: map-get($grid-breakpoints, 'xl')) {
+    font-size: 120%;
+  }
+
   h1 {
     font-family: 'Cairo', sans-serif;
-    font-size: 3rem;
+    font-size: 300%;
     margin-bottom: 3rem;
     text-align: center;
   }
 
   img {
-    margin: 3rem;
+    margin: 2rem;
     max-height: 50vmin;
     max-width: 50vmin;
   }
@@ -23,7 +33,7 @@
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    padding: 2%;
+    padding: 5%;
 
     &--bottom {
       justify-content: flex-end;
@@ -56,7 +66,10 @@
       background: $dimmed-overlay-background-color;
       .introduction {
         font-size: 150%;
-        max-width: 50vw;
+        max-width: 80vw;
+        @media (min-width: map-get($grid-breakpoints, 'xl')) {
+          max-width: 60vw;
+        }
       }
     }
   }

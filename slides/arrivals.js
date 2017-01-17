@@ -76,7 +76,7 @@ module.exports = (parameters) => {
           duration: 2000,
           map: {
             countriesInFocus,
-            scale: 5,
+            scale: 7,
             offset: [0, 100]
           }
         });

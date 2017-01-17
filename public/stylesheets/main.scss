@@ -13,6 +13,13 @@ $error-pre-text-color: #fff;
 
 $default-transition-duration: .5s;
 
+$grid-breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1900px
+);
+
 @import 'bootstrap';
 
 body {
