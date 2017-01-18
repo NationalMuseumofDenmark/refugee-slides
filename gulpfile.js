@@ -60,14 +60,21 @@ gulp.task('images', function() {
     .pipe(notify({ message: 'Images task complete', onLast: true }));
 });
 
+// Fonts
+gulp.task('fonts', function() {
+  return gulp.src('public/fonts/*')
+    .pipe(gulp.dest('dist/fonts'))
+    .pipe(notify({ message: 'Fonts task complete', onLast: true }));
+});
+
 // Clean
 gulp.task('clean', function() {
-  return del(['dist/styles', 'dist/scripts', 'dist/images']);
+  return del(['dist/styles', 'dist/scripts', 'dist/images', 'dist/fonts']);
 });
 
 // Default task
 gulp.task('default', ['clean'], function() {
-  gulp.start('styles', 'scripts', 'images');
+  gulp.start('styles', 'scripts', 'images', 'fonts');
 });
 
 // Watch

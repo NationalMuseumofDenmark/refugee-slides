@@ -1,4 +1,6 @@
-$font-family-sans-serif: 'Cairo', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+@import '../fonts/IndustryInc-Stencil-webfont';
+
+$font-family-sans-serif: 'Cairo', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
 $focus-color: #ff0;
 $map-background-color: #000;
